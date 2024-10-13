@@ -1,5 +1,5 @@
 <template>
-	<section class="w-10/12 mx-auto max-w-screen-md">
+	<section class="w-full mx-auto max-w-screen-md">
 		<aside
 			class="aspect-video w-full rounded-2xl overflow-hidden border-custom-green-1 border"
 		>

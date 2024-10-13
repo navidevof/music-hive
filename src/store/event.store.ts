@@ -11,17 +11,26 @@ export const useEventStore = defineStore(
 		const event = ref<IEvent>({ ...initialData.event });
 		const currentIdVideo = ref<string>("");
 		const playLists = ref<IVideo[]>([]);
+		const participants = ref<number>(0);
 
 		const resetStore = () => {
 			userName.value = "";
-			event.value = initialData.event;
+			event.value = { ...initialData.event };
 			currentIdVideo.value = "";
 			playLists.value = [];
+			participants.value = 0;
 
 			console.log("resetStore");
 		};
 
-		return { event, currentIdVideo, playLists, resetStore, userName };
+		return {
+			event,
+			currentIdVideo,
+			playLists,
+			resetStore,
+			userName,
+			participants,
+		};
 	},
 	{
 		persist: true,

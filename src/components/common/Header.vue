@@ -18,6 +18,7 @@
 				<button
 					v-if="auth.currentUser && auth.currentUser.uid == event.uid"
 					class="bg-red-500 text-white text-xs items-center gap-x-2 flex"
+					@click="onLeaveEvent"
 				>
 					<IconFinish class="size-5" />
 					Finalizar Evento
@@ -42,7 +43,33 @@ import { useEventStore } from "@/store/event.store";
 
 import IconFinish from "@/components/icons/IconFinish.vue";
 import IconLogout from "@/components/icons/IconLogout.vue";
+import { leaveEvent } from "@/services/event";
+import { useUIStore } from "@/store/ui.store";
+import { MESSAGES } from "@/utils/messages";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const eventStore = useEventStore();
+const uiStore = useUIStore();
+
+const { isLoading } = storeToRefs(uiStore);
 const { event } = storeToRefs(eventStore);
+
+const onLeaveEvent = async () => {
+	try {
+		isLoading.value = true;
+		const res = await leaveEvent({ eventId: event.value.eventId });
+		if (res.error) {
+			uiStore.showAlert("error", res.message);
+			return;
+		}
+
+		router.push("/");
+	} catch (error) {
+		console.log({ error });
+		uiStore.showAlert("error", MESSAGES.DEFAULT_ERROR);
+	} finally {
+		isLoading.value = false;
+	}
+};
 </script>

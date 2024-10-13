@@ -61,7 +61,7 @@ const onSubmitCreateEvent = async () => {
 		router.push("/event/" + res.data?.eventId);
 	} catch (error) {
 		console.log({ error });
-		uiStore.showAlert("error", MESSAGES.DEFAULT);
+		uiStore.showAlert("error", MESSAGES.DEFAULT_ERROR);
 	} finally {
 		emit("close");
 		isLoading.value = false;

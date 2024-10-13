@@ -67,15 +67,20 @@
 
 <script lang="ts" setup>
 import { ISearchVideo } from "@/interfaces/video";
-import { addVideoToPlaylist } from "@/services/event";
+import { addVideoToPlaylist } from "@/services/video";
 import { searchVideo } from "@/services/video";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useEventStore } from "../../store/event.store";
 import { storeToRefs } from "pinia";
 import { auth } from "@/firebase";
+import { useUIStore } from "@/store/ui.store";
+import { MESSAGES } from "@/utils/messages";
 
+const uiStore = useUIStore();
 const eventStore = useEventStore();
+
 const { event, userName } = storeToRefs(eventStore);
+const { isLoading } = storeToRefs(uiStore);
 
 const isLocalLoading = ref<boolean>(false);
 const search = ref<string>("");
@@ -108,19 +113,21 @@ const onAddToPlaylist = async (video: ISearchVideo) => {
 	if (!event.value?.eventId) return;
 	try {
 		showSearch.value = false;
+		isLoading.value = true;
 		const res = await addVideoToPlaylist({
 			userName: auth.currentUser ? "Administrador" : userName.value,
 			eventId: event.value.eventId,
 			video,
 		});
 		if (res.error) {
-			// TODO: show error
-			eventStore.resetStore();
+			uiStore.showAlert("error", res.message);
 			return;
 		}
 	} catch (error) {
 		console.log({ error });
-		eventStore.resetStore();
+		uiStore.showAlert("error", MESSAGES.DEFAULT_ERROR);
+	} finally {
+		isLoading.value = false;
 	}
 };
 

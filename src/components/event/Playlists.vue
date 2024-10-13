@@ -1,7 +1,7 @@
 <template>
-	<section class="w-10/12 mx-auto max-w-screen-md flex flex-col gap-y-5">
+	<section class="w-full flex flex-col gap-y-5">
 		<div
-			class="flex gap-x-2 items-center w-full bg-custom-black-2 rounded-2xl overflow-hidden py-2"
+			class="flex gap-x-2 items-center w-full bg-custom-black-2 rounded-2xl py-2"
 			v-for="video in playLists"
 			:key="video.videoId"
 		>
@@ -34,19 +34,20 @@
 					<button
 						type="button"
 						class="bg-red-500 max-w-xs py-2 px-3 md:py-3 md:px-4 line-clamp-1 mt-3"
-						@click="currentIdVideo = video.videoId"
+						@click="() => onRemoveVideoFromPlaylist(video.videoId)"
 					>
 						<IconTrash class="size-5" />
 					</button>
 				</div>
-				<button
-					v-else
-					type="button"
-					class="bg-custom-green-2 max-w-xs py-2 px-3 w-fit md:py-3 md:px-4 line-clamp-1 mt-3"
-					@click="currentIdVideo = video.videoId"
-				>
-					<IconHeart class="size-5" />
-				</button>
+				<Tooltip position="top" text="Próximamente..." v-else>
+					<button
+						type="button"
+						class="bg-custom-green-2 max-w-xs py-2 px-3 w-fit md:py-3 md:px-4 line-clamp-1 mt-3"
+						@click="currentIdVideo = video.videoId"
+					>
+						<IconHeart class="size-5" />
+					</button>
+				</Tooltip>
 			</div>
 		</div>
 	</section>
@@ -65,9 +66,16 @@ import { useEventStore } from "@/store/event.store";
 import IconHeart from "@/components/icons/IconHeart.vue";
 import IconPlayerPlay from "@/components/icons/IconPlayerPlay.vue";
 import IconTrash from "@/components/icons/IconTrash.vue";
+import { MESSAGES } from "@/utils/messages";
+import { removeVideoFromPlaylist } from "@/services/video";
+import { useUIStore } from "@/store/ui.store";
+import Tooltip from "../core/Tooltip.vue";
 
 const eventStore = useEventStore();
+const uiStore = useUIStore();
+
 const { playLists, event, currentIdVideo } = storeToRefs(eventStore);
+const { isLoading } = storeToRefs(uiStore);
 
 onMounted(async () => {
 	if (!event.value?.eventId) return;
@@ -98,5 +106,28 @@ const onChangeCurrentVideo = (videoId: string) => {
 		eventId: event.value.eventId,
 		videoId,
 	});
+};
+
+const onRemoveVideoFromPlaylist = async (videoId: string) => {
+	try {
+		isLoading.value = true;
+		const res = await removeVideoFromPlaylist({
+			eventId: event.value.eventId,
+			videoId,
+		});
+		if (res.error) {
+			uiStore.showAlert("error", res.message);
+			return;
+		}
+
+		playLists.value = playLists.value.filter(
+			(video) => video.videoId !== videoId
+		);
+	} catch (error) {
+		console.log({ error });
+		uiStore.showAlert("error", MESSAGES.DEFAULT_ERROR);
+	} finally {
+		isLoading.value = false;
+	}
 };
 </script>

@@ -13,7 +13,7 @@
 					<small>Ingresa tu nombre para poder participar.</small>
 				</div>
 				<button
-					@click="emit('close')"
+					@click="onSubmitSetUserName"
 					class="size-fit hover:text-custom-green-1 !p-0 text-custom-white"
 				>
 					x
