@@ -1,0 +1,49 @@
+# Bloqueo para rastreadores maliciosos
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Permitir acceso completo a todos los bots de búsqueda confiables
+User-agent: Googlebot
+Disallow:
+
+User-agent: Bingbot
+Disallow:
+
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /private/
+Disallow: /login/
+Disallow: /register/
+Disallow: /user-profile/
+Disallow: /settings/
+Disallow: /search/
+Allow: /
+
+# Sitemap para mejor indexación
+Sitemap: https://music-hive.vercel.app/sitemap.xml
+
+# Retraso para evitar sobrecargar tu servidor (en caso de servidores lentos o limitados)
+Crawl-delay: 10
+
+# Evita que rastreen los parámetros de búsqueda
+Disallow: /*?*
+
+# Impide el rastreo de archivos confidenciales
+Disallow: /robots.txt
+Disallow: /README.md
+Disallow: /LICENSE.txt
+Disallow: /config/
+Disallow: /backup/
+
+# Permitir indexar solo archivos JS, CSS e imágenes relevantes
+Allow: /assets/
+Allow: /images/
+Allow: /css/
+Allow: /js/
