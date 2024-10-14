@@ -20,7 +20,7 @@ import { storeToRefs } from "pinia";
 import Search from "@/components/event/Serach.vue";
 import Video from "@/components/event/Video.vue";
 import Playlists from "@/components/event/Playlists.vue";
-import ModalSetUserName from "@/components/event/ModalSetUserName.vue";
+import ModalSetUserName from "@/components/modals/event/ModalSetUserName.vue";
 import { auth } from "@/firebase";
 import { useUIStore } from "@/store/ui.store";
 import EventInformation from "@/components/event/EventInformation.vue";
@@ -32,7 +32,8 @@ const uiStore = useUIStore();
 const eventStore = useEventStore();
 
 const { isLoading } = storeToRefs(uiStore);
-const { event, userName, participants } = storeToRefs(eventStore);
+const { event, userName, participants, currentIdVideo } =
+	storeToRefs(eventStore);
 
 onBeforeMount(() => {
 	const $eventId = route.params.eventId as string;
@@ -45,6 +46,14 @@ onBeforeMount(() => {
 
 onMounted(async () => {
 	await onJoinEvent({ eventId: event.value.eventId });
+
+	socket.on("joinEvent", ($socketId: string) => {
+		socket.emit("updateCurrentVideo", {
+			eventId: event.value.eventId,
+			socketId: $socketId,
+			videoId: currentIdVideo.value,
+		});
+	});
 
 	socket.on("closeEvent", ($eventId: string) => {
 		if ($eventId === event.value.eventId) {

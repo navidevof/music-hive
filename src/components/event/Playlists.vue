@@ -1,55 +1,65 @@
 <template>
-	<section class="w-full flex flex-col gap-y-5">
-		<div
-			class="flex gap-x-2 items-center w-full bg-custom-black-2 rounded-2xl py-2"
-			v-for="video in playLists"
-			:key="video.videoId"
-		>
-			<div class="w-full aspect-video max-w-36 md:max-w-56 px-2">
-				<img
-					:src="video.image"
-					class="size-full"
-					loading="lazy"
-					:alt="`Imagen del video ${video.title}`"
-				/>
-			</div>
-			<div class="w-full flex flex-col gap-y-0">
-				<h4 class="text-sm font-bold w-full line-clamp-1">
-					{{ video.title }}
-				</h4>
-				<span class="text-xs text-custom-white">
-					<strong class="font-medium">Agrego por:</strong> {{ video.userName }}
-				</span>
-				<div
-					class="flex gap-x-2 items-center"
-					v-if="auth.currentUser && event.uid === auth.currentUser.uid"
-				>
-					<button
-						type="button"
-						class="bg-custom-green-2 max-w-xs py-2 px-3 md:py-3 md:px-4 line-clamp-1 mt-3"
-						@click="() => onChangeCurrentVideo(video.videoId)"
-					>
-						<IconPlayerPlay class="size-5" />
-					</button>
-					<button
-						type="button"
-						class="bg-red-500 max-w-xs py-2 px-3 md:py-3 md:px-4 line-clamp-1 mt-3"
-						@click="() => onRemoveVideoFromPlaylist(video.videoId)"
-					>
-						<IconTrash class="size-5" />
-					</button>
+	<section class="w-full flex flex-col gap-y-3">
+		<h2 class="font-semibold text-lg">Lista de reproducción</h2>
+		<aside class="w-full flex flex-col gap-y-5">
+			<div
+				class="flex gap-x-2 items-center w-full bg-custom-black-2 rounded-2xl py-2"
+				v-for="video in playLists"
+				:key="video.videoId"
+			>
+				<div class="w-full aspect-video max-w-36 md:max-w-56 px-2">
+					<img
+						:src="video.image"
+						class="size-full"
+						loading="lazy"
+						:alt="`Imagen del video ${video.title}`"
+					/>
 				</div>
-				<Tooltip position="top" text="Próximamente..." v-else>
-					<button
-						type="button"
-						class="bg-custom-green-2 max-w-xs py-2 px-3 w-fit md:py-3 md:px-4 line-clamp-1 mt-3"
-						@click="currentIdVideo = video.videoId"
+				<div class="w-full flex flex-col gap-y-0">
+					<h4 class="text-sm font-bold w-full line-clamp-1">
+						{{ video.title }}
+					</h4>
+					<span class="text-xs text-custom-white">
+						<strong class="font-medium">Agrego por:</strong>
+						{{ video.userName }}
+					</span>
+					<div
+						class="flex gap-x-2 items-center"
+						v-if="auth.currentUser && event.uid === auth.currentUser.uid"
 					>
-						<IconHeart class="size-5" />
-					</button>
-				</Tooltip>
+						<button
+							type="button"
+							class="bg-custom-green-2 max-w-xs py-2 px-3 md:py-3 md:px-4 line-clamp-1 mt-3"
+							@click="() => onChangeCurrentVideo(video.videoId)"
+						>
+							<IconPlayerPlay class="size-5" />
+						</button>
+						<button
+							type="button"
+							class="bg-red-500 max-w-xs py-2 px-3 md:py-3 md:px-4 line-clamp-1 mt-3"
+							@click="() => onRemoveVideoFromPlaylist(video.videoId)"
+						>
+							<IconTrash class="size-5" />
+						</button>
+					</div>
+					<Tooltip position="top" text="Próximamente..." v-else>
+						<button
+							type="button"
+							class="bg-custom-green-2 max-w-xs py-2 px-3 w-fit md:py-3 md:px-4 line-clamp-1 mt-3"
+							@click="currentIdVideo = video.videoId"
+						>
+							<IconHeart class="size-5" />
+						</button>
+					</Tooltip>
+				</div>
 			</div>
-		</div>
+			<span
+				v-if="playLists.length == 0"
+				class="text-center rounded-2xl bg-custom-black-2 p-4"
+			>
+				Aún no hay canciones en la lista. 👻
+			</span>
+		</aside>
 	</section>
 </template>
 

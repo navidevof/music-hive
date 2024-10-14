@@ -87,8 +87,8 @@
 </template>
 
 <script setup lang="ts">
-import ModalCreateEvent from "@/components/event/ModalCreateEvent.vue";
-import ModalJoinEvent from "@/components/event/ModalJoinEvent.vue";
+import ModalCreateEvent from "@/components/modals/event/ModalCreateEvent.vue";
+import ModalJoinEvent from "@/components/modals/event/ModalJoinEvent.vue";
 import IconHeart from "@/components/icons/IconHeart.vue";
 import IconSettings from "@/components/icons/IconSettings.vue";
 import IconYoutube from "@/components/icons/IconYoutube.vue";

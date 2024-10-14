@@ -1,8 +1,8 @@
 <template>
 	<footer
-		class="footer border-y border-custom-green-1 border-opacity-50 text-sm text-center py-7 md:py-10 grow-0"
+		class="footer border-y border-custom-green-1 border-opacity-50 py-7 md:py-10 grow-0"
 	>
-		<p>
+		<p class="text-balance text-sm text-center">
 			&copy; {{ new Date().getFullYear() }} MusicHive. Todos los derechos
 			reservados. Creado por:
 			<a

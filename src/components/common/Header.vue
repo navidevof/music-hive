@@ -14,7 +14,7 @@
 				/>
 				<h2 class="md:block hidden">Music Hive</h2>
 			</router-link>
-			<div v-if="event.eventId != ''">
+			<div v-if="event.eventId != '' && route.path != '/'">
 				<button
 					v-if="auth.currentUser && auth.currentUser.uid == event.uid"
 					class="bg-red-500 text-white text-xs items-center gap-x-2 flex"
@@ -46,8 +46,9 @@ import IconLogout from "@/components/icons/IconLogout.vue";
 import { leaveEvent } from "@/services/event";
 import { useUIStore } from "@/store/ui.store";
 import { MESSAGES } from "@/utils/messages";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 
+const route = useRoute();
 const router = useRouter();
 const eventStore = useEventStore();
 const uiStore = useUIStore();
