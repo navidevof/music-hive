@@ -81,7 +81,7 @@
 
 		<ModalJoinEvent
 			@close="showModalJoinEvent = false"
-			v-show="showModalJoinEvent"
+			v-if="showModalJoinEvent"
 		/>
 	</main>
 </template>

@@ -1,17 +1,17 @@
 <template>
-	<aside class="flex justify-between items-center w-full">
+	<aside class="flex justify-between gap-x-4 items-center w-full">
 		<h1 class="text-xl font-bold line-clamp-1">
 			Evento: <span class="font-normal">{{ event.name }}</span>
 		</h1>
 		<div class="flex items-center gap-x-4">
 			<button
 				@click="showModalQrCode = true"
-				class="text-xs md:text-sm text-custom-white p-0"
+				class="text-xs md:text-sm text-custom-white p-0 text-center"
 			>
 				<IconQrCode class="size-5 text-custom-green-1 inline" />
 				Compartir
 			</button>
-			<strong class="text-xs md:text-sm text-custom-white">
+			<strong class="text-xs md:text-sm text-custom-white text-nowrap">
 				<IconUsers class="size-5 text-custom-green-1 inline" />
 				{{ participants }}
 			</strong>
@@ -30,7 +30,7 @@ import { storeToRefs } from "pinia";
 import { useEventStore } from "@/store/event.store";
 import IconUsers from "@/components/icons/IconUsers.vue";
 import IconQrCode from "@/components/icons/IconQrCode.vue";
-import QRCodeDisplay from "./QRCodeDisplay.vue";
+import QRCodeDisplay from "@/components/modals/event/QRCodeDisplay.vue";
 
 const eventStore = useEventStore();
 const { participants, event } = storeToRefs(eventStore);

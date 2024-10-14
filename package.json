@@ -1,7 +1,7 @@
 {
 	"name": "music-hive",
 	"private": true,
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
@@ -19,6 +19,7 @@
 		"socket.io-client": "^4.8.0",
 		"sortablejs": "^1.15.3",
 		"vue": "^3.5.10",
+		"vue-qrcode-reader": "^5.5.11",
 		"vue-router": "^4.4.5",
 		"vue-toastification": "2.0.0-rc.5"
 	},

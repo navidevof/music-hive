@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, onUnmounted } from "vue";
+import { onBeforeMount, onBeforeUnmount, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import "@justinribeiro/lite-youtube";
 import socket from "@/lib/socket-client";
@@ -69,12 +69,11 @@ onMounted(async () => {
 	});
 
 	socket.on("participants", ($participants: number) => {
-		console.log("participants", $participants);
 		participants.value = $participants;
 	});
 });
 
-onUnmounted(() => {
+onBeforeUnmount(() => {
 	socket.emit("leaveEvent", event.value.eventId);
 	socket.disconnect();
 	eventStore.resetStore();

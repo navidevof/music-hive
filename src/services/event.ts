@@ -87,7 +87,7 @@ export const createEvent = async ({ name }: { name: string }) => {
 	}
 };
 
-export const leaveEvent = async ({ eventId }: { eventId: string }) => {
+export const closeEvent = async ({ eventId }: { eventId: string }) => {
 	try {
 		const res = await axiosClient.post(`/events/leave`, {
 			eventId,
