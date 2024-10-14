@@ -1,5 +1,6 @@
 <template>
 	<section
+		v-if="showModal"
 		class="fixed inset-0 z-50 h-screen w-full grid place-items-center bg-custom-black-2/50 backdrop-blur-sm transition duration-300 ease-out"
 	>
 		<aside
@@ -48,8 +49,7 @@ const eventStore = useEventStore();
 const { userName } = storeToRefs(eventStore);
 
 const $userName = ref<string>("");
-
-const emit = defineEmits(["close"]);
+const showModal = ref<boolean>(true);
 
 const onSubmitSetUserName = async () => {
 	if ($userName.value.trim() === "") {
@@ -58,6 +58,6 @@ const onSubmitSetUserName = async () => {
 		userName.value = $userName.value.trim();
 	}
 
-	emit("close");
+	showModal.value = false;
 };
 </script>
