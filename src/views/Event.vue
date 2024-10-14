@@ -34,8 +34,7 @@ const uiStore = useUIStore();
 const eventStore = useEventStore();
 
 const { isLoading } = storeToRefs(uiStore);
-const { event, userName, participants, currentIdVideo } =
-	storeToRefs(eventStore);
+const { event, participants, currentIdVideo } = storeToRefs(eventStore);
 
 onBeforeMount(() => {
 	const $eventId = route.params.eventId as string;

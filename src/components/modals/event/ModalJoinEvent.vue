@@ -36,7 +36,7 @@
 						@detect="onDetect"
 						@init="onInit"
 						@camera-on="isLoadingInternal = false"
-						class="z-10 relative"
+						class="z-10 relative aspect-square"
 					></qrcode-stream>
 					<div
 						class="loader m-auto absolute z-0"
