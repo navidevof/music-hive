@@ -4,7 +4,9 @@
 		<Search />
 		<Video />
 		<Playlists v-if="event.eventId" />
-		<ModalSetUserName v-if="userName === '' && !auth.currentUser" />
+		<ModalSetUserName
+			v-if="!auth.currentUser || event.uid != auth.currentUser.uid"
+		/>
 	</main>
 </template>
 
