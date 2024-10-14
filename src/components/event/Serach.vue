@@ -115,7 +115,10 @@ const onAddToPlaylist = async (video: ISearchVideo) => {
 		showSearch.value = false;
 		isLoading.value = true;
 		const res = await addVideoToPlaylist({
-			userName: auth.currentUser ? "Administrador" : userName.value,
+			userName:
+				auth.currentUser && event.value.uid == auth.currentUser.uid
+					? "Administrador"
+					: userName.value,
 			eventId: event.value.eventId,
 			video,
 		});
