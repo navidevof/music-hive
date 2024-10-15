@@ -6,8 +6,8 @@
 ## Características
 
 - **Búsqueda de videos de YouTube**: Los usuarios pueden buscar videos de YouTube y agregarlos a una cola.
-- **Cola de reproducción compartida**: Se pueden crear eventos musicales en los que los usuarios comparten listas de reproducción.
-- **Compartir enlaces de eventos**: Posibilidad de compartir un enlace directo a las sesiones sin necesidad de generar una imagen.
+- **Cola de reproducción compartida**: Se pueden crear eventos musicales en los que los usuarios creand y administran listas de reproducción.
+- **Compartir enlaces de eventos**: Posibilidad de compartir un enlace directo o ingresar a las sesiones por medio de un QR.
 
 ## Tecnologías
 
