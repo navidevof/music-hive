@@ -8,7 +8,25 @@
 				:videoid="currentIdVideo"
 				params="rel=0&showinfo=0"
 			></lite-youtube>
-			<img v-else :src="imageVideo" class="size-full" loading="lazy" />
+			<div v-else class="size-full relative">
+				<img
+					:src="video.image"
+					class="size-full absolute z-0 top-0 left-0 object-cover"
+					loading="lazy"
+				/>
+				<div
+					class="size-full flex flex-col bg-custom-black/70 relative z-10 p-5"
+				>
+					<h3 class="text-white md:text-xl font-bold line-clamp-1">
+						{{ video.title }}
+					</h3>
+					<div
+						class="text-center uppercase text-sm md:text-lg font-bold max-w-sm mx-auto grow flex text-pre justify-center items-center"
+					>
+						SOLO EL ADMINISTRADOR PUEDE REPRODUCIR LAS CANCIONES<br />
+					</div>
+				</div>
+			</div>
 		</aside>
 	</section>
 </template>
@@ -32,17 +50,23 @@ onMounted(async () => {
 	currentIdVideo.value = playLists.value[0].videoId;
 });
 
-const imageVideo = computed(() => {
-	if (playLists.value.length === 0) return "";
+const video = computed(() => {
+	if (playLists.value.length === 0) return {};
 	if (currentIdVideo.value === "") {
-		return playLists.value[0].image;
+		return {
+			image: playLists.value[0].image,
+			title: playLists.value[0].title,
+		};
 	}
 	const videoIdx = playLists.value.findIndex(
 		(video) => video.videoId === currentIdVideo.value
 	);
 
-	if (videoIdx === -1) return "";
+	if (videoIdx === -1) return {};
 
-	return playLists.value[videoIdx].image;
+	return {
+		image: playLists.value[videoIdx].image,
+		title: playLists.value[videoIdx].title,
+	};
 });
 </script>

@@ -46,7 +46,6 @@
 						<button
 							type="button"
 							class="bg-custom-green-2 max-w-xs py-2 px-3 w-fit md:py-3 md:px-4 line-clamp-1 mt-3"
-							@click="currentIdVideo = video.videoId"
 						>
 							<IconHeart class="size-5" />
 						</button>
