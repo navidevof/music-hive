@@ -1,5 +1,17 @@
-# Vue 3 + TypeScript + Vite
+# MusicHive
+![971_1x_shots_so](https://github.com/user-attachments/assets/6d11b4f2-8668-49b1-adae-61b073444abf)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+**MusicHive** es una plataforma web que permite a los usuarios buscar y agregar videos de YouTube a una cola para compartir experiencias musicales en tiempo real con otras personas. Incluye opciones de suscripción gratuitas y de pago con diversas funcionalidades adicionales.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Características
+
+- **Búsqueda de videos de YouTube**: Los usuarios pueden buscar videos de YouTube y agregarlos a una cola.
+- **Cola de reproducción compartida**: Se pueden crear eventos musicales en los que los usuarios comparten listas de reproducción.
+- **Compartir enlaces de eventos**: Posibilidad de compartir un enlace directo a las sesiones sin necesidad de generar una imagen.
+
+## Tecnologías
+
+- **Frontend**: Vue.js, TailwindCSS
+- **Backend**: Node.js/Express, Firebase
+- **Despliegue**: Vercel y Heroku
+- **Autenticación y base de datos**: Firebase
